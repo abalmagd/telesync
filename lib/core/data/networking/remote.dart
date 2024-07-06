@@ -1,7 +1,6 @@
-class EnvironmentVariables {
-  // TODO: Add API keys to .env
-  static const apiKeyV3 = '';
-  static const apiKeyV4 = '';
+class Remote {
+  /// The value here is the key name in the .env file
+  static const apiToken = 'API_TOKEN';
   static const baseUrl = 'https://api.themoviedb.org/3';
 
   static const tmdbDomain = 'https://www.themoviedb.org/';

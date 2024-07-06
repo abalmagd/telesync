@@ -33,16 +33,16 @@ class NetworkingInterceptor extends InterceptorsWrapper with Alerts {
   }
 
   @override
-  void onError(DioException e, ErrorInterceptorHandler handler) {
+  void onError(DioException err, ErrorInterceptorHandler handler) {
     logPrint(
       message: 'onError ===>\n'
-          'Path: ${e.requestOptions.uri}\n'
-          'Type: ${e.type}\n'
-          'Message: ${e.message}\n'
-          'Data: ${e.error}\n'
-          'Response: ${e.response}',
+          'Path: ${err.requestOptions.uri}\n'
+          'Type: ${err.type}\n'
+          'Message: ${err.message}\n'
+          'Data: ${err.error}\n'
+          'Response: ${err.response}',
       level: Level.error,
     );
-    return handler.next(e);
+    return handler.next(err);
   }
 }

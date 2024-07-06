@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-
 extension StringExtension on String {
+  /// Used for tracking hardcoded strings.
   String get hardcoded => this;
 }

@@ -16,7 +16,6 @@ class Failure extends Equatable with Alerts implements Exception {
   });
 
   static Failure handleExceptions(DioException e) {
-    late final String message;
     switch (e.type) {
       case DioExceptionType.badResponse:
         return Failure(

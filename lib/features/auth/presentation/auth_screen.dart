@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
 import 'package:telesync/core/domain/constants/assets.dart';
-import 'package:telesync/features/auth/presentation/riverpod/auth_controller.dart';
 import 'package:telesync/shared/widgets/primary_appbar.dart';
 import 'package:telesync/utils/extensions/string_extension.dart';
 
@@ -13,7 +12,7 @@ class AuthScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
-    final auth = ref.watch(authControllerProvider);
+    // final auth = ref.watch(authControllerProvider);
     return Scaffold(
       appBar: PrimaryAppBar(titleText: 'App name'.hardcoded),
       body: Padding(
@@ -27,7 +26,7 @@ class AuthScreen extends ConsumerWidget {
                 frameRate: const FrameRate(30),
               ),
             ),
-            ElevatedButton(onPressed: () {}, child: Text('Button')),
+            ElevatedButton(onPressed: () {}, child: const Text('Button')),
             Row(
               children: [
                 Container(

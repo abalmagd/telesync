@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:telesync/core/data/networking/dio.dart';
-import 'package:telesync/core/data/environment/environment_variables.dart';
-import 'package:telesync/core/domain/failure.dart';
+import 'package:telesync/core/data/networking/remote.dart';
+import 'package:telesync/core/domain/error/failure.dart';
 
 /// Responsible for fetching data from remote api and checking for
 /// network errors (Ex: connection timeout).
@@ -33,7 +33,7 @@ class AuthRepository implements AuthRepositoryAbstraction {
   @override
   Future<Map<String, dynamic>> loginAsGuest() async {
     try {
-      final response = await _dio.post(EnvironmentVariables.newGuestSession);
+      final response = await _dio.post(Remote.newGuestSession);
 
       final Map<String, dynamic> json = response.data;
       return json;
@@ -45,7 +45,7 @@ class AuthRepository implements AuthRepositoryAbstraction {
   @override
   Future<Map<String, dynamic>> createRequestToken() async {
     try {
-      final response = await _dio.get(EnvironmentVariables.createRequestToken);
+      final response = await _dio.get(Remote.createRequestToken);
 
       final Map<String, dynamic> json = response.data;
 
@@ -59,7 +59,7 @@ class AuthRepository implements AuthRepositoryAbstraction {
   Future<Map<String, dynamic>> login(String requestToken) async {
     try {
       final response = await _dio.post(
-        EnvironmentVariables.newSession,
+        Remote.newSession,
         data: {'request_token': requestToken},
       );
 
@@ -75,7 +75,7 @@ class AuthRepository implements AuthRepositoryAbstraction {
   Future<Map<String, dynamic>> getProfile(String sessionId) async {
     try {
       final response = await _dio.get(
-        EnvironmentVariables.account,
+        Remote.account,
         queryParameters: {'session_id': sessionId},
       );
 
@@ -90,7 +90,7 @@ class AuthRepository implements AuthRepositoryAbstraction {
   Future<Map<String, dynamic>> logout(String sessionId) async {
     try {
       final response = await _dio.delete(
-        EnvironmentVariables.session,
+        Remote.session,
         data: {'session_id': sessionId},
       );
 

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:telesync/core/domain/failure.dart';
+import 'package:telesync/core/domain/error/failure.dart';
 import 'package:telesync/features/auth/data/auth_repository.dart';
 import 'package:telesync/features/auth/domain/models/session.dart';
 import 'package:telesync/utils/extensions/map_extension.dart';

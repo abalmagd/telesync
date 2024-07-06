@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
-import 'package:telesync/core/data/environment/environment_variables.dart';
-import 'package:telesync/core/data/environment/environment_variables.dart';
+import 'package:telesync/core/data/networking/remote.dart';
 import 'package:username_gen/username_gen.dart';
 
-/// Gravatar https://www.gravatar.com/avatar/c9e9fc152ee756a900db85757c29815d
+/// Gravatar url example
+/// https://www.gravatar.com/avatar/c9e9fc152ee756a900db85757c29815d
 class Profile extends Equatable {
   final Avatar avatar;
   final int id;
@@ -108,7 +108,7 @@ class Avatar extends Equatable {
   });
 
   static const Avatar empty = Avatar(
-    gravatar: EnvironmentVariables.gravatar,
+    gravatar: Remote.gravatar,
     tmdb: '',
   );
 
@@ -118,7 +118,7 @@ class Avatar extends Equatable {
 
   factory Avatar.fromJson(Map<String, dynamic> json) {
     return Avatar(
-      gravatar: '${EnvironmentVariables.gravatar}${json['gravatar']['hash']}',
+      gravatar: '${Remote.gravatar}${json['gravatar']['hash']}',
       tmdb: json['tmdb']['avatar_path'] ?? '',
     );
   }

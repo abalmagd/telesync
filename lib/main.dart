@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:telesync/core/data/local_storage/shared_prefs.dart';
@@ -14,6 +15,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   final sharedPreferences = await SharedPreferences.getInstance();
+  await dotenv.load();
   runApp(
     EasyLocalization(
       supportedLocales: Localization.supportedLocales.values.toList(),
