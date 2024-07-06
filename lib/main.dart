@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:telesync/core/data/shared_prefs.dart';
+import 'package:telesync/core/data/local_storage/shared_prefs.dart';
 import 'package:telesync/core/domain/constants/assets.dart';
 import 'package:telesync/core/domain/constants/localization.dart';
 import 'package:telesync/core/domain/routing/go_router.dart';

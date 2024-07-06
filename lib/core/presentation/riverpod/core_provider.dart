@@ -1,8 +1,8 @@
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:telesync/core/data/environment/storage_keys.dart';
-import 'package:telesync/core/data/shared_prefs.dart';
+import 'package:telesync/core/data/local_storage/storage_keys.dart';
+import 'package:telesync/core/data/local_storage/shared_prefs.dart';
 import 'package:telesync/utils/helpers/alerts.dart';
 
 final coreControllerProvider =

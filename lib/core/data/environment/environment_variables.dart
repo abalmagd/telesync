@@ -7,6 +7,8 @@ class EnvironmentVariables {
   static const tmdbDomain = 'https://www.themoviedb.org/';
   static const gravatar = 'https://www.gravatar.com/avatar/';
   static const tmdbImage = 'https://image.tmdb.org/t/p/';
+
+  //
   static const posterQuality = 'w342';
   static const backdropQuality = 'w780';
   static const ogBackdropQuality = 'original';

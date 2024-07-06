@@ -3,8 +3,8 @@ import 'dart:convert';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:telesync/core/data/environment/environment_variables.dart';
-import 'package:telesync/core/data/environment/storage_keys.dart';
-import 'package:telesync/core/data/shared_prefs.dart';
+import 'package:telesync/core/data/local_storage/storage_keys.dart';
+import 'package:telesync/core/data/local_storage/shared_prefs.dart';
 import 'package:telesync/features/auth/domain/auth_service.dart';
 import 'package:telesync/features/auth/domain/models/session.dart';
 import 'package:telesync/utils/helpers/alerts.dart';
