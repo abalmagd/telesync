@@ -6,5 +6,3 @@ class Localization {
     'ar': Locale('ar'),
   };
 }
-
-enum LocalizationKeys { x }
