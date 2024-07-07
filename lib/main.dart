@@ -8,6 +8,7 @@ import 'package:telesync/core/domain/constants/assets.dart';
 import 'package:telesync/core/domain/routing/go_router.dart';
 import 'package:telesync/core/presentation/localization/localization.dart';
 import 'package:telesync/core/presentation/riverpod/core_provider.dart';
+import 'package:telesync/core/presentation/riverpod/locale_provider.dart';
 import 'package:telesync/core/presentation/theme/custom_theme.dart';
 import 'package:toastification/toastification.dart';
 
@@ -21,32 +22,37 @@ Future<void> main() async {
       supportedLocales: Localization.supportedLocales.values.toList(),
       path: Assets.translations,
       useOnlyLangCode: true,
-      child: ProviderScope(
-        overrides: [
-          sharedPreferencesProvider.overrideWithValue(sharedPreferences),
-        ],
-        child: TelesyncApp(),
-      ),
+      child: TelesyncApp(sharedPreferences: sharedPreferences),
     ),
   );
 }
 
-class TelesyncApp extends ConsumerWidget with CustomTheme {
-  TelesyncApp({super.key});
+class TelesyncApp extends StatelessWidget with CustomTheme {
+  TelesyncApp({super.key, required this.sharedPreferences});
+
+  final SharedPreferences sharedPreferences;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return ToastificationWrapper(
-      child: MaterialApp.router(
-        title: 'Telesync',
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: context.localizationDelegates,
-        supportedLocales: context.supportedLocales,
-        locale: context.locale,
-        theme: lightTheme(context),
-        darkTheme: darkTheme(context),
-        themeMode: ref.watch(coreControllerProvider),
-        routerConfig: ref.read(goRouterProvider),
+  Widget build(BuildContext context) {
+    return ProviderScope(
+      overrides: [
+        sharedPreferencesProvider.overrideWithValue(sharedPreferences),
+        localeProvider.overrideWithValue(context.locale),
+      ],
+      child: Consumer(
+        builder: (context, ref, child) => ToastificationWrapper(
+          child: MaterialApp.router(
+            title: 'Telesync',
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+            theme: lightTheme(context),
+            darkTheme: darkTheme(context),
+            themeMode: ref.watch(coreControllerProvider),
+            routerConfig: ref.read(goRouterProvider),
+          ),
+        ),
       ),
     );
   }
