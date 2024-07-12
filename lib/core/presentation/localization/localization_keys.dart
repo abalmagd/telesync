@@ -1,3 +1,4 @@
 class LocalizationKeys {
-  static const ex = 'ex';
+  static const telesync = 'telesync';
+  static const letsFindAMovie = 'letsFindAMovie';
 }

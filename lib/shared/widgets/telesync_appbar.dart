@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const PrimaryAppBar({
+class TelesyncAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const TelesyncAppBar({
     super.key,
     this.titleText,
     this.centerTitle = true,
@@ -22,8 +22,14 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return AppBar(
-      title: titleWidget ?? Text(titleText!),
+      backgroundColor: theme.scaffoldBackgroundColor,
+      title: titleWidget ??
+          Text(
+            titleText!,
+            style: theme.textTheme.headlineSmall,
+          ),
       leading: leading,
       centerTitle: centerTitle,
       actions: const [
