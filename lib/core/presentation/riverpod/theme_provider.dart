@@ -1,14 +1,14 @@
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:telesync/core/data/local_storage/storage_keys.dart';
 import 'package:telesync/core/data/local_storage/shared_prefs.dart';
+import 'package:telesync/core/data/local_storage/storage_keys.dart';
 import 'package:telesync/utils/helpers/alerts.dart';
 
-final coreControllerProvider =
-    NotifierProvider<CoreController, ThemeMode>(CoreController.new);
+final themeControllerProvider =
+    NotifierProvider<ThemeController, ThemeMode>(ThemeController.new);
 
-class CoreController extends Notifier<ThemeMode> with Alerts {
+class ThemeController extends Notifier<ThemeMode> with Alerts {
   late final SharedPrefs _sharedPrefs;
 
   @override

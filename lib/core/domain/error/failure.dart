@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:telesync/utils/extensions/string_extension.dart';
 import 'package:telesync/utils/helpers/alerts.dart';
 import 'package:toastification/toastification.dart';
 
@@ -19,49 +20,49 @@ class Failure extends Equatable with Alerts implements Exception {
     switch (e.type) {
       case DioExceptionType.badResponse:
         return Failure(
-          message: 'Error bad response',
+          message: 'Error bad response'.hardcoded,
           code: e.response?.statusCode,
           exception: e,
         );
       case DioExceptionType.connectionTimeout:
         return Failure(
-          message: 'Connection time out',
+          message: 'Connection time out'.hardcoded,
           code: e.response?.statusCode,
           exception: e,
         );
       case DioExceptionType.sendTimeout:
         return Failure(
-          message: 'Post connection time out',
+          message: 'Post connection time out'.hardcoded,
           code: e.response?.statusCode,
           exception: e,
         );
       case DioExceptionType.receiveTimeout:
         return Failure(
-          message: 'Get connection time out',
+          message: 'Get connection time out'.hardcoded,
           code: e.response?.statusCode,
           exception: e,
         );
       case DioExceptionType.badCertificate:
         return Failure(
-          message: 'Connection failed due to a bad certificate',
+          message: 'Connection failed due to a bad certificate'.hardcoded,
           code: e.response?.statusCode,
           exception: e,
         );
       case DioExceptionType.cancel:
         return Failure(
-          message: 'Request was canceled',
+          message: 'Request was canceled'.hardcoded,
           code: e.response?.statusCode,
           exception: e,
         );
       case DioExceptionType.connectionError:
         return Failure(
-          message: 'Failed to connect to server',
+          message: 'Failed to connect to server'.hardcoded,
           code: e.response?.statusCode,
           exception: e,
         );
       case DioExceptionType.unknown:
         return Failure(
-          message: e.message ?? 'Something went wrong',
+          message: e.message ?? 'Something went wrong'.hardcoded,
           code: e.response?.statusCode,
           exception: e,
         );

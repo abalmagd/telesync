@@ -92,12 +92,7 @@ class AuthService implements AuthServiceAbstraction {
 
       json.addEntries(tokenJson.entries);
 
-      final profileJson =
-          await _baseAuthRepository.getProfile(tokenJson['session_id']);
-
-      json.addAll({'profile': profileJson});
-
-      final success = tokenJson['success'] && (profileJson['success'] ?? true);
+      final success = tokenJson['success'];
 
       if (!success) {
         throw Failure(

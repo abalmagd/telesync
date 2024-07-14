@@ -10,6 +10,7 @@ class Assets {
   // Icons
 
   // SVGs
+  static const redirect = '$svgs/redirect.svg';
 
   // Lottie
   static const landing = '$lottie/landing.json';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:telesync/utils/helpers/alerts.dart';
 
-class AppLifeCycleWrapper extends StatelessWidget with Alerts {
+class AppLifeCycleWrapper extends HookWidget with Alerts {
   const AppLifeCycleWrapper({super.key, required this.child});
 
   final MaterialApp child;

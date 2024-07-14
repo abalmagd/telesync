@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:telesync/shared/widgets/theme_switch.dart';
 
 class TelesyncAppBar extends StatelessWidget implements PreferredSizeWidget {
   const TelesyncAppBar({
@@ -33,7 +34,7 @@ class TelesyncAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: leading,
       centerTitle: centerTitle,
       actions: const [
-        // TODO: Theme switch
+        ThemeSwitch(),
       ],
     );
   }

@@ -15,8 +15,6 @@ abstract class AuthRepositoryAbstraction {
 
   Future<Map<String, dynamic>> login(String requestToken);
 
-  Future<Map<String, dynamic>> getProfile(String sessionId);
-
   Future<Map<String, dynamic>> logout(String sessionId);
 }
 
@@ -65,21 +63,6 @@ class AuthRepository implements AuthRepositoryAbstraction {
 
       final Map<String, dynamic> json = response.data;
 
-      return json;
-    } on DioException catch (e) {
-      throw Failure.handleExceptions(e);
-    }
-  }
-
-  @override
-  Future<Map<String, dynamic>> getProfile(String sessionId) async {
-    try {
-      final response = await _dio.get(
-        Remote.account,
-        queryParameters: {'session_id': sessionId},
-      );
-
-      final Map<String, dynamic> json = response.data;
       return json;
     } on DioException catch (e) {
       throw Failure.handleExceptions(e);
