@@ -17,7 +17,7 @@ abstract class AuthServiceAbstraction {
 
   Future<Either<Failure, bool>> logout({required String sessionId});
 
-  Future<Either<Failure, Map<String, String>>> createRequestToken();
+  Future<Either<Failure, Map<String, dynamic>>> createRequestToken();
 
   Future<Either<Failure, Session>> login({required String requestToken});
 }
@@ -56,18 +56,13 @@ class AuthService implements AuthServiceAbstraction {
   }
 
   @override
-  Future<Either<Failure, Map<String, String>>> createRequestToken() async {
+  Future<Either<Failure, Map<String, dynamic>>> createRequestToken() async {
     try {
       final json = await _baseAuthRepository.createRequestToken();
 
       final bool success = json['success'];
 
-      if (!success) {
-        throw Failure(
-          message: json['status_message'],
-          code: json['status_code'],
-        );
-      }
+      if (!success) return Left(Failure.fromJson(json));
 
       final String requestToken = json['request_token'];
       final String expiresAt = json['expires_at'];

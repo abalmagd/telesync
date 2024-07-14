@@ -11,37 +11,36 @@ import 'package:telesync/utils/helpers/alerts.dart';
 import 'package:toastification/toastification.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'auth_state.dart';
-
 final authControllerProvider =
-    AsyncNotifierProvider<AuthController, AuthState>(AuthController.new);
+    AsyncNotifierProvider<AuthController, Session>(AuthController.new);
 
-class AuthController extends AsyncNotifier<AuthState> with Alerts {
+class AuthController extends AsyncNotifier<Session> with Alerts {
   late final SharedPrefs _sharedPrefs;
   late final AuthServiceAbstraction _authService;
 
   @override
-  FutureOr<AuthState> build() {
+  FutureOr<Session> build() {
+    logPrint(message: 'Building $runtimeType');
+
     _sharedPrefs = ref.read(sharedPrefsProvider);
     _authService = ref.read(authServiceProvider);
     final sessionString = _sharedPrefs.getString(key: StorageKeys.session.name);
 
-    final session = sessionString != null && sessionString.isNotEmpty
-        ? Session.fromRawJson(sessionString)
-        : Session.empty;
+    final session = sessionString?.isNotEmpty ?? false
+        ? Session.fromRawJson(sessionString!)
+        : const Session();
 
-    logPrint(message: 'Building $runtimeType');
     logData(session: session);
-    return AuthState(session: session);
+    return session;
   }
 
   void logData({Session? session}) {
-    logPrint(message: (session ?? state.value?.session).toString());
+    logPrint(message: (session ?? state.value).toString());
   }
 
   void setSession({Session? session}) {
     if (session != null) {
-      state = AsyncData(state.value!.copyWith(session: session));
+      state = AsyncData(session);
       _sharedPrefs.set(
         key: StorageKeys.session.name,
         value: session.toRawJson(),
@@ -58,9 +57,9 @@ class AuthController extends AsyncNotifier<AuthState> with Alerts {
       final sessionRequest = jsonDecode(sessionRequestJson);
       final String expiresAt = sessionRequest['expires_at'];
       state = AsyncData(
-        state.value!.copyWith(
+        Session(
           requestToken: sessionRequest['request_token'],
-          expiresAt: sessionRequest['expires_at'],
+          sessionExpireDate: sessionRequest['expires_at'],
         ),
       );
       final now = DateTime.now();
@@ -102,9 +101,9 @@ class AuthController extends AsyncNotifier<AuthState> with Alerts {
         );
 
         state = AsyncData(
-          state.value!.copyWith(
+          Session(
             requestToken: sessionRequest['request_token'],
-            expiresAt: sessionRequest['expires_at'],
+            sessionExpireDate: sessionRequest['expires_at'],
           ),
         );
 
@@ -128,7 +127,7 @@ class AuthController extends AsyncNotifier<AuthState> with Alerts {
     state = const AsyncLoading();
 
     final result =
-        await _authService.login(requestToken: state.value!.requestToken);
+        await _authService.login(requestToken: state.value!.requestToken ?? '');
 
     result.fold(
       (failure) {
@@ -146,14 +145,14 @@ class AuthController extends AsyncNotifier<AuthState> with Alerts {
   Future<void> logout() async {
     state = const AsyncLoading();
 
-    if (state.value!.session.isGuest) {
-      setSession(session: Session.empty);
+    if (state.value!.isGuest) {
+      setSession(session: const Session());
       showToast(message: 'Logout Success!');
       return;
     }
 
     final result =
-        await _authService.logout(sessionId: state.value!.session.sessionId);
+        await _authService.logout(sessionId: state.value!.sessionId ?? '');
 
     result.fold(
       (failure) {
@@ -161,7 +160,7 @@ class AuthController extends AsyncNotifier<AuthState> with Alerts {
         failure.toast();
       },
       (success) {
-        setSession(session: Session.empty);
+        setSession(session: const Session());
         showToast(message: 'Logout Success!');
       },
     );

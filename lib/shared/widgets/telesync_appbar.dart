@@ -26,11 +26,7 @@ class TelesyncAppBar extends StatelessWidget implements PreferredSizeWidget {
     final theme = Theme.of(context);
     return AppBar(
       backgroundColor: theme.scaffoldBackgroundColor,
-      title: titleWidget ??
-          Text(
-            titleText!,
-            style: theme.textTheme.headlineSmall,
-          ),
+      title: titleWidget ?? Text(titleText!),
       leading: leading,
       centerTitle: centerTitle,
       actions: const [

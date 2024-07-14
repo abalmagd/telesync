@@ -45,9 +45,7 @@ class AuthRepository implements AuthRepositoryAbstraction {
     try {
       final response = await _dio.get(Remote.createRequestToken);
 
-      final Map<String, dynamic> json = response.data;
-
-      return json;
+      return response.data;
     } on DioException catch (e) {
       throw Failure.handleExceptions(e);
     }

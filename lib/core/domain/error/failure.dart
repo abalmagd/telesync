@@ -16,7 +16,7 @@ class Failure extends Equatable with Alerts implements Exception {
     this.exception,
   });
 
-  static Failure handleExceptions(DioException e) {
+  factory Failure.handleExceptions(DioException e) {
     switch (e.type) {
       case DioExceptionType.badResponse:
         return Failure(
@@ -67,6 +67,13 @@ class Failure extends Equatable with Alerts implements Exception {
           exception: e,
         );
     }
+  }
+
+  factory Failure.fromJson(Map<String, dynamic> json) {
+    return Failure(
+      message: json['status_message'],
+      code: json['status_code'],
+    );
   }
 
   void toast() => showToast(

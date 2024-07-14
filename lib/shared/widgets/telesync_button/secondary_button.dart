@@ -23,7 +23,6 @@ class _TelesyncSecondaryButton extends TelesyncButton {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return OutlinedButton(
       onPressed: (isLoading || !enabled) ? null : onPressed,
       child: Visibility(
@@ -32,13 +31,7 @@ class _TelesyncSecondaryButton extends TelesyncButton {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              title,
-              style: theme.textTheme.bodyLarge?.copyWith(
-                fontWeight: FontWeight.w600,
-                color: Palette.onPrimary,
-              ),
-            ),
+            Text(title),
             if (icon != null) ...[const Gap(12), icon!],
             if (svgIcon != null) ...[const Gap(12), SvgPicture.asset(svgIcon!)],
           ],

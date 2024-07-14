@@ -1,7 +1,9 @@
 {
   "telesync": "Telesync",
-  "letsFindAMovie": "Be in sync with your favourite shows!",
+  "onBoardingText": "Be in sync with your favourite shows!",
   "headsUp": "Heads Up!",
   "redirectWarning": "You are about to be redirected to authenticate your login on themoviedb.org.\nWhen you complete the process, return to access the app.",
-  "confirm": "Confirm"
+  "confirm": "Confirm",
+  "login": "Login",
+  "continueAsGuest": "Continue as guest"
 }

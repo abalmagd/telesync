@@ -15,16 +15,12 @@ class _TelesyncTextButton extends TelesyncButton {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     return TextButton(
       onPressed: (isLoading || !enabled) ? null : onPressed,
       child: Visibility(
         visible: !isLoading,
         replacement: const TelesyncProgressIndicator(),
-        child: Text(
-          title,
-          style: textTheme.bodyLarge?.copyWith(),
-        ),
+        child: Text(title),
       ),
     );
   }

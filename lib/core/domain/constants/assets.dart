@@ -10,7 +10,10 @@ class Assets {
   // Icons
 
   // SVGs
-  static const redirect = '$svgs/redirect.svg';
+  static const redirectLight = '$svgs/redirect_light.svg';
+  static const redirectDark = '$svgs/redirect_dark.svg';
+  static const onboardingDark = '$svgs/onboarding_dark.svg';
+  static const onboardingLight = '$svgs/onboarding_light.svg';
 
   // Lottie
   static const landing = '$lottie/landing.json';

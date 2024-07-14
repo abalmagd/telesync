@@ -35,13 +35,7 @@ class _TelesyncPrimaryButton extends TelesyncButton {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              title,
-              style: theme.textTheme.bodyLarge?.copyWith(
-                fontWeight: FontWeight.w600,
-                color: Palette.onPrimary,
-              ),
-            ),
+            Text(title),
             if (icon != null) ...[const Gap(12), icon!],
             if (svgIcon != null) ...[const Gap(12), SvgPicture.asset(svgIcon!)],
           ],
