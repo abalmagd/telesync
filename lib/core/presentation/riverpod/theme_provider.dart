@@ -1,57 +1,38 @@
-import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:telesync/core/data/local_storage/shared_prefs.dart';
-import 'package:telesync/core/data/local_storage/storage_keys.dart';
-import 'package:telesync/utils/helpers/alerts.dart';
 
-final themeControllerProvider =
+final themeProvider =
     NotifierProvider<ThemeController, ThemeMode>(ThemeController.new);
 
-class ThemeController extends Notifier<ThemeMode> with Alerts {
-  late final SharedPrefs _sharedPrefs;
+class ThemeController extends Notifier<ThemeMode> {
+  late final SharedPreferences sharedPrefs;
 
   @override
   ThemeMode build() {
-    _sharedPrefs = ref.read(sharedPrefsProvider);
-
-    final ThemeMode themeMode = getThemeMode() ?? ThemeMode.system;
-
-    logPrint(message: 'Building $runtimeType');
-
+    sharedPrefs = ref.read(sharedPrefsProvider);
+    final ThemeMode themeMode = getThemeMode();
     return themeMode;
   }
 
-  ThemeMode? getThemeMode() {
-    final localThemeMode =
-        _sharedPrefs.getString(key: StorageKeys.themeMode.name);
-
-    return EnumToString.fromString(
-      ThemeMode.values,
-      localThemeMode ?? ThemeMode.dark.name,
-    );
-  }
-
-  void changeThemeMode(BuildContext context) async {
+  void changeThemeMode(Brightness brightness) {
     switch (state) {
       case ThemeMode.system:
-        state = MediaQuery.of(context).platformBrightness == Brightness.light
-            ? state = ThemeMode.dark
-            : state = ThemeMode.light;
-        break;
+        state =
+            brightness == Brightness.light ? ThemeMode.dark : ThemeMode.light;
       case ThemeMode.light:
         state = ThemeMode.dark;
-        break;
+        sharedPrefs.setBool(SharedPrefsKeys.themeMode, true);
       case ThemeMode.dark:
         state = ThemeMode.light;
-        break;
+        sharedPrefs.setBool(SharedPrefsKeys.themeMode, false);
     }
+  }
 
-    _sharedPrefs.set(
-      key: StorageKeys.themeMode.name,
-      value: EnumToString.convertToString(state),
-    );
+  ThemeMode getThemeMode() {
+    final isDark = sharedPrefs.getBool(SharedPrefsKeys.themeMode) ?? true;
 
-    logPrint(message: 'Theme Mode changed to $state');
+    return isDark ? ThemeMode.dark : ThemeMode.light;
   }
 }
