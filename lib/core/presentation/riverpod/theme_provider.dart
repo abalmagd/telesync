@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:telesync/core/data/local_storage/shared_prefs.dart';
+import 'package:telesync/core/data/local/shared_prefs.dart';
 
 final themeProvider =
     NotifierProvider<ThemeController, ThemeMode>(ThemeController.new);
