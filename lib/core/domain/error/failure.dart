@@ -35,14 +35,12 @@ class Failure extends Equatable {
 
   factory Failure.fromJson(Map<String, dynamic> json) {
     return Failure(
-      message: json['status_message'],
-      code: json['status_code'],
+      message: json['message'],
+      code: json['statusCode'],
     );
   }
 
-  /*void toast() => showToast(
-
-  );*/
+  void toast() => print(message);
 
   @override
   bool get stringify => true;

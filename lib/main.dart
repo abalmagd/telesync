@@ -6,6 +6,7 @@ import 'package:telesync/core/data/local/shared_prefs.dart';
 import 'package:telesync/core/domain/constants/assets.dart';
 import 'package:telesync/core/domain/localization/locale_provider.dart';
 import 'package:telesync/core/presentation/riverpod/theme_provider.dart';
+import 'package:telesync/features/auth/presentation/login_screen.dart';
 import 'package:telesync/features/home_screen.dart';
 
 import 'core/domain/localization/supported_locales.dart';
@@ -47,8 +48,8 @@ class TelesyncApp extends StatelessWidget with CustomTheme {
           locale: context.locale,
           theme: lightTheme(context),
           darkTheme: darkTheme(context),
-          themeMode: themeMode,
-          home: const HomeScreen(),
+          themeMode: ThemeMode.light,
+          home: const LoginScreen(),
         );
       },),
     );

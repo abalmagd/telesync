@@ -7,4 +7,5 @@ final sharedPrefsProvider = Provider<SharedPreferences>(
 
 class SharedPrefsKeys {
   static const themeMode = 'theme-mode';
+  static const session = 'session';
 }
