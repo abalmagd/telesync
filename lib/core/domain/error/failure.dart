@@ -1,7 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:logger/logger.dart';
+import 'package:telesync/core/domain/utils/alerts.dart';
+import 'package:toastification/toastification.dart';
 
-class Failure extends Equatable {
+class Failure extends Equatable with Alerts implements Exception {
   final String message;
   final int? code;
   final Exception? exception;
@@ -40,9 +43,18 @@ class Failure extends Equatable {
     );
   }
 
-  /*void toast() => showToast(
+  void toast() => showToast(
+        message: message,
+        severity: ToastificationType.error,
+        description: code.toString(),
+      );
 
-  );*/
+  void log() => logPrint(
+        message: message,
+        error: this,
+        level: Level.error,
+        stackTrace: StackTrace.current,
+      );
 
   @override
   bool get stringify => true;

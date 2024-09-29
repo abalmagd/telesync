@@ -2,9 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:telesync/core/domain/localization/supported_locales.dart';
+import 'package:telesync/core/domain/utils/alerts.dart';
 import 'package:telesync/core/presentation/riverpod/theme_provider.dart';
+import 'package:toastification/toastification.dart';
 
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends ConsumerWidget with Alerts {
   const HomeScreen({super.key});
 
   @override
@@ -26,8 +28,8 @@ class HomeScreen extends ConsumerWidget {
             child: const Text('EN'),
           ),
           TextButton(
-            onPressed: () => context
-                .setLocale(SupportedLocales.supportedLocales[Languages.ar.name]!),
+            onPressed: () => context.setLocale(
+                SupportedLocales.supportedLocales[Languages.ar.name]!),
             child: const Text('AR'),
           ),
         ],
@@ -37,7 +39,12 @@ class HomeScreen extends ConsumerWidget {
         children: [
           ElevatedButton(onPressed: () {}, child: const Text('Elevated BTN')),
           FilledButton(onPressed: () {}, child: const Text('Filled BTN')),
-          TextButton(onPressed: () {}, child: const Text('Text BTN')),
+          TextButton(
+            onPressed: () => logPrint(
+              message: 'Test',
+            ),
+            child: const Text('Text BTN'),
+          ),
         ],
       ),
     );
