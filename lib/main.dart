@@ -7,7 +7,6 @@ import 'package:telesync/core/domain/constants/assets.dart';
 import 'package:telesync/core/domain/localization/locale_provider.dart';
 import 'package:telesync/core/domain/routing/go_router.dart';
 import 'package:telesync/core/presentation/riverpod/theme_provider.dart';
-import 'package:telesync/features/home_screen.dart';
 import 'package:toastification/toastification.dart';
 
 import 'core/domain/localization/supported_locales.dart';

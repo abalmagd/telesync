@@ -1,5 +1,6 @@
 {
   "telesync": "تلفزيون",
-  "blue": "ازرق العينين",
-  "test": "test"
+  "welcomeText": "مرحبا بك!",
+  "login": "تسجيل الدخول",
+  "continueAsGuest": "تسجيل دخول كضيف"
 }

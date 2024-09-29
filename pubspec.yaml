@@ -41,6 +41,8 @@ dependencies:
   equatable: ^2.0.5
   toastification: ^2.2.0
   logger: ^2.4.0
+  flutter_svg: ^2.0.10+1
+  gap: ^3.0.1
 
 
 
@@ -83,6 +85,7 @@ flutter:
   # https://flutter.dev/assets-and-images/#from-packages
   assets:
     - assets/translations/
+    - assets/svg/
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a

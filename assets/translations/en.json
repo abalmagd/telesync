@@ -1,5 +1,6 @@
 {
   "telesync": "Telesync",
-  "blue": "Blue",
-  "test": "test"
+  "welcomeText": "Welcome!",
+  "login": "Login",
+  "continueAsGuest": "Continue as Guest"
 }

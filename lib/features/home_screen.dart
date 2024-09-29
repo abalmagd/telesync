@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:telesync/core/domain/localization/supported_locales.dart';
 import 'package:telesync/core/domain/utils/alerts.dart';
 import 'package:telesync/core/presentation/riverpod/theme_provider.dart';
-import 'package:toastification/toastification.dart';
 
 class HomeScreen extends ConsumerWidget with Alerts {
   const HomeScreen({super.key});

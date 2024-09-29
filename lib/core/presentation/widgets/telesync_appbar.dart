@@ -1,0 +1,40 @@
+import 'package:flutter/material.dart';
+import 'package:telesync/core/presentation/widgets/locale_switch.dart';
+
+import 'theme_switch.dart';
+
+class TelesyncAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const TelesyncAppBar({
+    super.key,
+    this.titleText,
+    this.centerTitle = true,
+    this.titleWidget,
+    this.leading,
+  }) : assert(
+          (titleText != null) ^ (titleWidget != null),
+          'You must set either "titleText" or "titleWidget", but not both',
+        );
+
+  final String? titleText;
+  final bool centerTitle;
+  final Widget? titleWidget;
+  final Widget? leading;
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return AppBar(
+      backgroundColor: theme.scaffoldBackgroundColor,
+      title: titleWidget ?? Text(titleText!),
+      leading: leading,
+      centerTitle: centerTitle,
+      actions: const [
+        ThemeSwitch(),
+        LocaleSwitch(),
+      ],
+    );
+  }
+}
