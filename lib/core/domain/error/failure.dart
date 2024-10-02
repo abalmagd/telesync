@@ -45,7 +45,7 @@ class Failure extends Equatable with Alerts implements Exception {
 
   void toast() => showToast(
         message: message,
-        severity: ToastificationType.error,
+        type: ToastificationType.error,
         description: code.toString(),
       );
 

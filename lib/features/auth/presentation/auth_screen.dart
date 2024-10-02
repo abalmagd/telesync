@@ -9,6 +9,8 @@ import 'package:telesync/core/presentation/riverpod/theme_provider.dart';
 import 'package:telesync/core/presentation/widgets/telesync_appbar.dart';
 import 'package:telesync/core/presentation/widgets/telesync_button/telesync_button.dart';
 
+import 'widgets/redirect_warning_sheet.dart';
+
 class AuthScreen extends ConsumerWidget {
   const AuthScreen({super.key});
 
@@ -32,8 +34,21 @@ class AuthScreen extends ConsumerWidget {
                     : Assets.onboardingLight,
               ),
             ),
-            TelesyncButton.primary(onPressed: () {}, title: 'Login', icon: Icon(Icons.abc),),
-            FilledButton(onPressed: () {}, child: Text('Guest')),
+            TelesyncButton.primary(
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  scrollControlDisabledMaxHeightRatio: 0.8,
+                  builder: (context) => const RedirectWarningSheet(),
+                );
+              },
+              title: LocaleKeys.login.tr(),
+              icon: const Icon(Icons.abc),
+            ),
+            TelesyncButton.text(
+              onPressed: () {},
+              title: LocaleKeys.continueAsGuest.tr(),
+            ),
           ],
         ),
       ),

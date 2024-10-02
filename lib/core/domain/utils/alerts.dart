@@ -17,10 +17,10 @@ mixin Alerts {
   void showToast({
     required String message,
     String? description,
-    ToastificationType severity = ToastificationType.info,
+    ToastificationType type = ToastificationType.info,
   }) {
     toastification.show(
-      type: severity,
+      type: type,
       title: Text(message),
       autoCloseDuration: const Duration(seconds: 5),
       closeOnClick: true,

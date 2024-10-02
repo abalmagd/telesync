@@ -6,4 +6,7 @@ abstract class LocaleKeys {
   static const welcomeText = 'welcomeText';
   static const login = 'login';
   static const continueAsGuest = 'continueAsGuest';
+  static const headsUp = 'headsUp';
+  static const redirectWarning = 'redirectWarning';
+  static const confirm = 'confirm';
 }

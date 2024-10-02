@@ -1,23 +1,20 @@
 part of 'telesync_button.dart';
 
-class _TelesyncPrimaryButton extends TelesyncButton {
-  const _TelesyncPrimaryButton({
+class _TelesyncSecondaryButton extends TelesyncButton {
+  const _TelesyncSecondaryButton({
     required super.onPressed,
     required super.title,
-    required super.enabled,
-    required super.isLoading,
     super.svgIcon,
     super.icon,
     super.borderColor,
     super.fillColor,
-  }) : assert(
-          (icon == null || svgIcon == null),
-          "Only one of icon or svgIcon can be non-null.",
-        );
+    super.enabled = true,
+    super.isLoading = false,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return FilledButton(
+    return OutlinedButton(
       onPressed: (isLoading || !enabled) ? null : onPressed,
       child: isLoading
           ? const TelesyncLoader()

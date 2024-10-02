@@ -5,11 +5,21 @@ mixin CustomTheme {
   ThemeData lightTheme(BuildContext context) {
     return ThemeData(
       useMaterial3: true,
-      scaffoldBackgroundColor: Palette.scaffoldBgLight,
       colorScheme: const ColorScheme.light(
         brightness: Brightness.light,
         primary: Palette.primaryLight,
         onPrimary: Palette.white,
+        surface: Palette.scaffoldBgLight,
+      ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: FilledButton.styleFrom(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        ),
       ),
     );
   }
@@ -17,11 +27,21 @@ mixin CustomTheme {
   ThemeData darkTheme(BuildContext context) {
     return ThemeData(
       useMaterial3: true,
-      scaffoldBackgroundColor: Palette.scaffoldBgDark,
       colorScheme: const ColorScheme.dark(
         brightness: Brightness.dark,
         primary: Palette.primaryDark,
         onPrimary: Palette.white,
+        surface: Palette.scaffoldBgDark,
+      ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: FilledButton.styleFrom(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        ),
       ),
     );
   }

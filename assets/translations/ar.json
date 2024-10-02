@@ -2,5 +2,8 @@
   "telesync": "تلفزيون",
   "welcomeText": "مرحبا بك!",
   "login": "تسجيل الدخول",
-  "continueAsGuest": "تسجيل دخول كضيف"
+  "continueAsGuest": "تسجيل دخول كضيف",
+  "headsUp": "انتبه!",
+  "redirectWarning": "سيتم تحويلك الي موقع تسجيل الدخول",
+  "confirm": "تأكيد"
 }

@@ -1,13 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:telesync/core/presentation/widgets/telesync_loader.dart';
 
 part 'primary_button.dart';
-// part 'secondary_button.dart';
-// part 'text_button.dart';
+part 'secondary_button.dart';
+part 'text_button.dart';
 
 abstract class TelesyncButton extends StatelessWidget {
-  const TelesyncButton({super.key});
+  const TelesyncButton({
+    super.key,
+    required this.onPressed,
+    required this.title,
+    required this.enabled,
+    required this.isLoading,
+    this.svgIcon,
+    this.icon,
+    this.borderColor,
+    this.fillColor,
+  });
+
+  final VoidCallback onPressed;
+  final String title;
+  final String? svgIcon;
+  final Icon? icon;
+  final Color? borderColor;
+  final Color? fillColor;
+  final bool enabled;
+  final bool isLoading;
 
   factory TelesyncButton.primary({
     required VoidCallback onPressed,
@@ -31,7 +51,7 @@ abstract class TelesyncButton extends StatelessWidget {
     );
   }
 
-  /*factory TelesyncButton.secondary({
+  factory TelesyncButton.secondary({
     required VoidCallback onPressed,
     required String title,
     String? svgIcon,
@@ -65,5 +85,7 @@ abstract class TelesyncButton extends StatelessWidget {
       enabled: enabled,
       isLoading: isLoading,
     );
-  }*/
+  }
+
+
 }
