@@ -12,7 +12,7 @@ final dioProvider = Provider<Dio>(
       BaseOptions(
         baseUrl: const String.fromEnvironment(EnvKeys.baseUrl),
         headers: {
-          'Authorization': const String.fromEnvironment(EnvKeys.bearerToken),
+          'Authorization': const String.fromEnvironment(EnvKeys.apiKey),
         },
         queryParameters: {'language': ref.read(localeProvider).toString()},
       ),

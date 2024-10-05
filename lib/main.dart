@@ -5,9 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:telesync/core/data/local/shared_prefs.dart';
 import 'package:telesync/core/domain/constants/assets.dart';
 import 'package:telesync/core/domain/localization/locale_provider.dart';
-import 'package:telesync/core/domain/routing/go_router.dart';
 import 'package:telesync/core/presentation/riverpod/theme_provider.dart';
-import 'package:toastification/toastification.dart';
 
 import 'core/domain/localization/supported_locales.dart';
 import 'core/presentation/theme/custom_theme.dart';
@@ -53,7 +51,7 @@ class TelesyncApp extends StatelessWidget with CustomTheme {
               darkTheme: darkTheme(context),
               themeMode: themeMode,
               routerConfig: ref.read(goRouterProvider),
-            ),
+            );
           );
         },
       ),

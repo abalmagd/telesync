@@ -44,6 +44,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   gap: ^3.0.1
   url_launcher: ^6.3.0
+  dartz: ^0.10.1
 
 
 
@@ -86,6 +87,7 @@ flutter:
   # https://flutter.dev/assets-and-images/#from-packages
   assets:
     - assets/translations/
+    - assets/images/
     - assets/svg/
 
   # To add custom fonts to your application, add a fonts section here,

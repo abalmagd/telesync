@@ -38,8 +38,8 @@ class Failure extends Equatable with Alerts implements Exception {
 
   factory Failure.fromJson(Map<String, dynamic> json) {
     return Failure(
-      message: json['status_message'],
-      code: json['status_code'],
+      message: json['message'],
+      code: json['statusCode'],
     );
   }
 
