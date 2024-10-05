@@ -16,6 +16,7 @@ class AuthScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // 2
     final themeMode = ref.read(themeProvider);
     return Scaffold(
       appBar: TelesyncAppBar(titleText: LocaleKeys.telesync.tr()),

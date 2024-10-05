@@ -13,6 +13,7 @@ import 'core/domain/localization/supported_locales.dart';
 import 'core/presentation/theme/custom_theme.dart';
 
 Future<void> main() async {
+  // comment
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
