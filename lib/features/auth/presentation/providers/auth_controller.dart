@@ -1,25 +1,48 @@
+import 'dart:async';
+
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:telesync/core/data/networking/remote.dart';
 import 'package:telesync/core/domain/utils/alerts.dart';
+import 'package:telesync/features/auth/domain/auth_service.dart';
+import 'package:telesync/features/auth/domain/models/session.dart';
 import 'package:toastification/toastification.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 final authController =
-    AsyncNotifierProvider<AuthController, void>(AuthController.new);
+    AsyncNotifierProvider<AuthController, Session?>(AuthController.new);
 
-class AuthController extends AsyncNotifier<void> with Alerts {
+class AuthController extends AsyncNotifier<Session?> with Alerts {
+  late final AuthServiceAbstraction authService;
+
   @override
-  void build() {}
+  FutureOr<Session?> build() {
+    authService = ref.read(authServiceProvider);
 
-  void getRequestToken() {
-
+    return null;
   }
 
-  Future<void> openBrowser() async {
+  Future<void> createRequestToken() async {
+    state = const AsyncLoading();
+    final result = await authService.createRequestToken();
+
+    result.fold(
+      (failure) {
+        state = AsyncError(failure, StackTrace.current);
+        failure.toast();
+      },
+      (session) {
+        state = AsyncData(session);
+        openBrowser(session.requestToken);
+      },
+    );
+  }
+
+  Future<void> openBrowser(String requestToken) async {
     try {
       await launchUrl(
         mode: LaunchMode.externalApplication,
-        Uri.parse('https://www.themoviedb.org/authenticate/bb824a7bcc78a9702a20e68675ca754d34b5576b'),
+        Uri.parse('${Remote.tmdbLogin}/$requestToken'),
       )
           ? null
           : showToast(

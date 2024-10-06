@@ -46,7 +46,7 @@ class Failure extends Equatable with Alerts implements Exception {
   void toast() => showToast(
         message: message,
         type: ToastificationType.error,
-        description: code.toString(),
+        description: code == null ? null : '$code',
       );
 
   void log() => logPrint(
