@@ -11,6 +11,7 @@ class Failure extends Equatable with Alerts implements Exception {
 
   const Failure({required this.message, this.code, this.exception});
 
+  /// From device error (Example: Network)
   factory Failure.fromNetwork(DioException e) {
     late String message;
     switch (e.type) {
@@ -36,6 +37,7 @@ class Failure extends Equatable with Alerts implements Exception {
     );
   }
 
+  /// From response (Example: failed response)
   factory Failure.fromJson(Map<String, dynamic> json) {
     return Failure(
       message: json['status_message'],

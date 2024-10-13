@@ -1,32 +1,34 @@
-import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:telesync/core/data/networking/dio.dart';
+import 'package:telesync/core/data/networking/network_adapter/network_adapter.dart';
+import 'package:telesync/core/data/networking/network_adapter/network_request.dart';
 import 'package:telesync/core/data/networking/remote.dart';
 import 'package:telesync/core/domain/error/failure.dart';
+import 'package:telesync/features/auth/domain/models/session.dart';
+import 'package:dartz/dartz.dart';
 
 abstract class AuthRepoAbstraction {
-  Future<Map<String, dynamic>> createRequestToken();
+  Future<Either<Failure, Session>> createRequestToken();
 }
 
 final authRepoProvider = Provider<AuthRepoAbstraction>((ref) {
-  return AuthRepository(ref.read(dioProvider));
+  return AuthRepository(ref.read(networkAdapterProvider));
 });
 
 class AuthRepository implements AuthRepoAbstraction {
-  AuthRepository(this.dio);
+  AuthRepository(this.adapter);
 
-  final Dio dio;
+  final NetworkAdapterAbstraction adapter;
 
   @override
-  Future<Map<String, dynamic>> createRequestToken() async {
-    try {
-      final response = await dio.get(Remote.createRequestToken);
-      if (response.data['success']) {
-        return response.data;
-      }
-      throw Failure.fromJson(response.data);
-    } on DioException catch (e) {
-      throw Failure.fromNetwork(e);
-    }
+  Future<Either<Failure, Session>> createRequestToken() async {
+    final response = await adapter.request(
+      request: NetworkRequest(
+        path: Remote.createRequestToken,
+        requestType: RequestType.get,
+      ),
+    );
+
+    if (response.success) return Right(Session.fromJson(response.data));
+    return Left(response.failure!);
   }
 }

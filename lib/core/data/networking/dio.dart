@@ -14,7 +14,7 @@ final dioProvider = Provider<Dio>(
         headers: {
           'Authorization': const String.fromEnvironment(EnvKeys.bearerToken),
         },
-        queryParameters: {'language': ref.read(localeProvider).toString()},
+        queryParameters: {'language': ref.read(localeProvider).languageCode},
       ),
     );
 

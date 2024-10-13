@@ -11,7 +11,13 @@ class LocaleSwitch extends StatelessWidget {
       onPressed: () {
         showMenu(
           context: context,
-          position: const RelativeRect.fromLTRB(0, 0, 20, 20),
+          position: RelativeRect.fromDirectional(
+            textDirection: Directionality.of(context),
+            start: 16,
+            top: kToolbarHeight,
+            end: 0,
+            bottom: 0,
+          ),
           items: SupportedLocales.supportedLocales.values.map((locale) {
             return PopupMenuItem(
               onTap: () => context.setLocale(locale),
