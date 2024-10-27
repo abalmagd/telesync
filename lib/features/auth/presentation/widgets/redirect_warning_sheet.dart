@@ -41,7 +41,7 @@ class RedirectWarningSheet extends ConsumerWidget {
           ),
           TelesyncButton.primary(
             onPressed: () {
-              ref.read(authController.notifier).createRequestToken();
+              ref.read(authController.notifier).checkSessionDetails();
             },
             isLoading: controller is AsyncLoading,
             title: LocaleKeys.confirm.tr(),
