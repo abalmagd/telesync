@@ -66,6 +66,12 @@ class NetworkAdapter implements NetworkAdapterAbstraction {
       }
       return _responseMapper(response);
     } on DioException catch (e) {
+      if (e.type == DioExceptionType.badResponse) {
+        return NetworkResponse(
+          success: false,
+          failure: Failure.fromJson(e.response?.data),
+        );
+      }
       return NetworkResponse(
         success: false,
         failure: Failure.fromNetwork(e),

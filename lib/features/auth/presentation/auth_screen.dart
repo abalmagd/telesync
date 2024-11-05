@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:telesync/core/domain/constants/assets.dart';
 import 'package:telesync/core/domain/localization/locale_keys.g.dart';
 import 'package:telesync/core/domain/utils/extensions/context_extension.dart';
@@ -46,8 +47,11 @@ class AuthScreen extends ConsumerWidget {
               icon: const Icon(Icons.abc),
             ),
             TelesyncButton.text(
-              onPressed: () {},
-              title: LocaleKeys.continueAsGuest.tr(),
+              onPressed: () async {
+                final prefs = await SharedPreferences.getInstance();
+                prefs.clear();
+              },
+              title: 'Clear',
             ),
           ],
         ),

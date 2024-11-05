@@ -8,6 +8,7 @@ import 'package:dartz/dartz.dart';
 
 abstract class AuthRepoAbstraction {
   Future<Either<Failure, Session>> createRequestToken();
+  Future<Either<Failure, String>> login(String requestToken);
 }
 
 final authRepoProvider = Provider<AuthRepoAbstraction>((ref) {
@@ -29,6 +30,20 @@ class AuthRepository implements AuthRepoAbstraction {
     );
 
     if (response.success) return Right(Session.fromJson(response.data));
+    return Left(response.failure!);
+  }
+
+  @override
+  Future<Either<Failure, String>> login(String requestToken) async {
+    final response = await adapter.request(
+      request: NetworkRequest(
+        path: Remote.createSessionWithToken,
+        requestType: RequestType.post,
+        data: {'request_token': requestToken},
+      ),
+    );
+
+    if (response.success) return Right(response.data['session_id']);
     return Left(response.failure!);
   }
 }

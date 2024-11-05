@@ -23,8 +23,7 @@ class AuthController extends AsyncNotifier<Session?> with Alerts {
   FutureOr<Session?> build() {
     authRepo = ref.read(authRepoProvider);
     sharedPrefs = ref.read(sharedPrefsProvider);
-    final session = fetchSession();
-    print(session?.requestToken);
+    final session = fetchCachedSession();
     return session;
   }
 
@@ -78,13 +77,15 @@ class AuthController extends AsyncNotifier<Session?> with Alerts {
   }
 
   void cacheSession(Session session) {
+    // TODO:: Use secure storage
     sharedPrefs.setString(
       SharedPrefsKeys.session,
       jsonEncode(session.toMap()),
     );
   }
 
-  Session? fetchSession() {
+  Session? fetchCachedSession() {
+    // TODO:: Use secure storage
     final sessionString = sharedPrefs.getString(SharedPrefsKeys.session);
 
     if (sessionString == null) return null;
@@ -92,5 +93,25 @@ class AuthController extends AsyncNotifier<Session?> with Alerts {
     final session = Session.fromJson(jsonDecode(sessionString));
 
     return session;
+  }
+
+  Future<void> login() async {
+    final session = state.value;
+    if (session == null || session.sessionId != null) return;
+
+    state = const AsyncLoading();
+    final result = await authRepo.login(session.requestToken);
+
+    result.fold(
+      (failure) {
+        state = const AsyncData(null);
+        state = AsyncError(failure, StackTrace.current);
+        failure.toast();
+      },
+      (sessionId) {
+        state = AsyncData(state.value?.copyWith(sessionId: sessionId));
+        if (state.value != null) cacheSession(state.value!);
+      },
+    );
   }
 }
