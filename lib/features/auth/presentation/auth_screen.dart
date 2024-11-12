@@ -9,6 +9,7 @@ import 'package:telesync/core/domain/utils/extensions/context_extension.dart';
 import 'package:telesync/core/presentation/riverpod/theme_provider.dart';
 import 'package:telesync/core/presentation/widgets/telesync_appbar.dart';
 import 'package:telesync/core/presentation/widgets/telesync_button/telesync_button.dart';
+import 'package:telesync/features/auth/presentation/providers/auth_controller.dart';
 
 import 'widgets/redirect_warning_sheet.dart';
 
@@ -40,11 +41,13 @@ class AuthScreen extends ConsumerWidget {
                 showModalBottomSheet(
                   context: context,
                   scrollControlDisabledMaxHeightRatio: 0.8,
-                  builder: (context) => const RedirectWarningSheet(),
+                  builder: (context) => RedirectWarningSheet(
+                    onAccept:
+                        ref.read(authController.notifier).checkSessionDetails,
+                  ),
                 );
               },
               title: LocaleKeys.login.tr(),
-              icon: const Icon(Icons.abc),
             ),
             TelesyncButton.text(
               onPressed: () async {

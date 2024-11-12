@@ -1,13 +1,15 @@
-class Session {
-  Session({
+import 'package:equatable/equatable.dart';
+
+class Session extends Equatable {
+  const Session({
     required this.requestToken,
     required this.expiresAt,
     this.sessionId,
   });
 
-  String requestToken;
-  String? sessionId;
-  DateTime expiresAt;
+  final String requestToken;
+  final String? sessionId;
+  final DateTime expiresAt;
 
   factory Session.fromJson(Map<String, dynamic> json) {
     final expiresAt =
@@ -38,4 +40,10 @@ class Session {
       sessionId: sessionId ?? this.sessionId,
     );
   }
+
+  @override
+  List<Object?> get props => [requestToken, expiresAt, sessionId];
+
+  @override
+  bool get stringify => true;
 }

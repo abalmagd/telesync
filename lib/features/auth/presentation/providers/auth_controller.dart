@@ -20,23 +20,26 @@ class AuthController extends AsyncNotifier<Session?> with Alerts {
   late final SharedPreferences sharedPrefs;
 
   @override
-  FutureOr<Session?> build() {
+  Future<Session?> build() async {
     authRepo = ref.read(authRepoProvider);
     sharedPrefs = ref.read(sharedPrefsProvider);
     final session = fetchCachedSession();
+    logPrint(message: 'Build => ${session.toString()}');
+    if (session != null) await login(initialSession: session);
     return session;
   }
 
-  void checkSessionDetails() {
+  Future<void> checkSessionDetails() async {
     if (state.value == null) {
-      createRequestToken();
+      await createRequestToken();
       return;
-    } else if (DateTime.now().isAfter(state.value!.expiresAt)) {
-      createRequestToken();
+    }
+    if (DateTime.now().isAfter(state.value!.expiresAt)) {
+      await createRequestToken();
       return;
     }
 
-    openBrowser(state.value!.requestToken);
+    await openBrowser(state.value!.requestToken);
   }
 
   Future<void> createRequestToken() async {
@@ -95,8 +98,9 @@ class AuthController extends AsyncNotifier<Session?> with Alerts {
     return session;
   }
 
-  Future<void> login() async {
-    final session = state.value;
+  Future<void> login({Session? initialSession}) async {
+    final session = initialSession ?? state.value;
+    logPrint(message: 'Login => ${session.toString()}');
     if (session == null || session.sessionId != null) return;
 
     state = const AsyncLoading();
@@ -104,13 +108,14 @@ class AuthController extends AsyncNotifier<Session?> with Alerts {
 
     result.fold(
       (failure) {
-        state = const AsyncData(null);
+        state = AsyncData(session);
         state = AsyncError(failure, StackTrace.current);
         failure.toast();
       },
       (sessionId) {
         state = AsyncData(state.value?.copyWith(sessionId: sessionId));
         if (state.value != null) cacheSession(state.value!);
+        logPrint(message: 'Session ID => ${state.value.toString()}');
       },
     );
   }
