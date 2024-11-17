@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:telesync/core/domain/utils/extensions/ref_listenable.dart';
 import 'package:telesync/features/auth/presentation/auth_screen.dart';
 import 'package:telesync/features/auth/presentation/providers/auth_controller.dart';
 import 'package:telesync/features/dashboard/dashboard_screen.dart';
@@ -10,13 +11,15 @@ final goRouterProvider = Provider<GoRouter>((ref) {
     initialLocation: '/auth',
     debugLogDiagnostics: kDebugMode,
     redirect: (context, state) {
-      final path = state.uri.path;
-      final isLoggedIn = ref.watch(authController).value?.sessionId != null;
+      print('redirect');
+      final isLoggedIn =
+          ref.watch(authController).valueOrNull?.sessionId != null;
+      print(isLoggedIn);
 
-      if (path == '/auth' && isLoggedIn) return '/dashboard';
       if (isLoggedIn) return '/dashboard';
-      return null;
+      return '/auth';
     },
+    refreshListenable: ref.asValueListenable(authController),
     routes: [
       GoRoute(
         path: '/auth',

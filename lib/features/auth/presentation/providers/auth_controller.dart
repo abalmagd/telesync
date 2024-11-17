@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:telesync/core/data/local/shared_prefs.dart';
 import 'package:telesync/core/data/networking/remote.dart';
+import 'package:telesync/core/domain/routing/go_router.dart';
 import 'package:telesync/core/domain/utils/alerts.dart';
 import 'package:telesync/features/auth/data/auth_repository.dart';
 import 'package:telesync/features/auth/domain/models/session.dart';
@@ -118,5 +119,10 @@ class AuthController extends AsyncNotifier<Session?> with Alerts {
         logPrint(message: 'Session ID => ${state.value.toString()}');
       },
     );
+  }
+
+  logout() {
+    sharedPrefs.remove(SharedPrefsKeys.session);
+    state = const AsyncData(null);
   }
 }
