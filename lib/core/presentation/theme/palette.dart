@@ -8,10 +8,12 @@ class Palette {
   static const danger = Color(0xFFd32f2f);
 
   // Light
-  static const primaryLight = Color(0xFF2196f3);
-  static const scaffoldBgLight = white;
+  static const primaryLight = Color(0xFF0099ff);
+  static const surfaceLight = white;
+  static const onSurfaceLight = Color(0xFF222F3D);
 
   // Dark
-  static const primaryDark = Color(0xFFf44336);
-  static const scaffoldBgDark = Color(0xFF212121);
+  static const primaryDark = Color(0xFF43A8D4);
+  static const surfaceDark = Color(0xFF0C091A);
+  static const onSurfaceDark = white;
 }

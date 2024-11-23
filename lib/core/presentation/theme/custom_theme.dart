@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:telesync/core/presentation/theme/palette.dart';
+import 'package:telesync/core/presentation/theme/text_theme.dart';
 
 mixin CustomTheme {
   ThemeData lightTheme(BuildContext context) {
@@ -9,8 +10,10 @@ mixin CustomTheme {
         brightness: Brightness.light,
         primary: Palette.primaryLight,
         onPrimary: Palette.white,
-        surface: Palette.scaffoldBgLight,
+        surface: Palette.surfaceLight,
+        onSurface: Palette.onSurfaceLight,
       ),
+      textTheme: CustomTextTheme.textTheme(context),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -31,8 +34,10 @@ mixin CustomTheme {
         brightness: Brightness.dark,
         primary: Palette.primaryDark,
         onPrimary: Palette.white,
-        surface: Palette.scaffoldBgDark,
+        surface: Palette.surfaceDark,
+        onSurface: Palette.onSurfaceDark,
       ),
+      textTheme: CustomTextTheme.textTheme(context),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),

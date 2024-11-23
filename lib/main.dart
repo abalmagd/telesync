@@ -51,6 +51,9 @@ class TelesyncApp extends StatelessWidget with CustomTheme {
                 supportedLocales: context.supportedLocales,
                 locale: context.locale,
                 theme: lightTheme(context),
+                scrollBehavior: ScrollConfiguration.of(context).copyWith(
+                  physics: const BouncingScrollPhysics(),
+                ),
                 darkTheme: darkTheme(context),
                 themeMode: themeMode,
                 routerConfig: ref.read(goRouterProvider),

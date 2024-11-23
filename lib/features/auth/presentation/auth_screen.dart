@@ -2,10 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:telesync/core/domain/constants/assets.dart';
 import 'package:telesync/core/domain/localization/locale_keys.g.dart';
-import 'package:telesync/core/domain/utils/extensions/context_extension.dart';
 import 'package:telesync/core/presentation/riverpod/theme_provider.dart';
 import 'package:telesync/core/presentation/widgets/telesync_appbar.dart';
 import 'package:telesync/core/presentation/widgets/telesync_button/telesync_button.dart';
@@ -18,6 +16,7 @@ class AuthScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
     final themeMode = ref.read(themeProvider);
     return Scaffold(
       appBar: TelesyncAppBar(titleText: LocaleKeys.telesync.tr()),
@@ -27,7 +26,7 @@ class AuthScreen extends ConsumerWidget {
           children: [
             Text(
               LocaleKeys.welcomeText.tr(),
-              style: context.theme.textTheme.titleLarge,
+              style: theme.textTheme.titleLarge,
             ),
             Expanded(
               child: SvgPicture.asset(
@@ -48,13 +47,6 @@ class AuthScreen extends ConsumerWidget {
                 );
               },
               title: LocaleKeys.login.tr(),
-            ),
-            TelesyncButton.text(
-              onPressed: () async {
-                final prefs = await SharedPreferences.getInstance();
-                prefs.clear();
-              },
-              title: 'Clear',
             ),
           ],
         ),
