@@ -19,7 +19,7 @@ class AuthScreen extends ConsumerWidget {
     final theme = Theme.of(context);
     final themeMode = ref.read(themeProvider);
     return Scaffold(
-      appBar: TelesyncAppBar(titleText: LocaleKeys.telesync.tr()),
+      appBar: TelesyncAppBar(title: LocaleKeys.telesync.tr()),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(

@@ -16,4 +16,9 @@ class Palette {
   static const primaryDark = Color(0xFF43A8D4);
   static const surfaceDark = Color(0xFF0C091A);
   static const onSurfaceDark = white;
+
+  // Other
+  static const silver = Color(0xFFC0C0C0);
+  static const smoke = Color(0xFF848884);
+  static const charcoal = Color(0xFF36454F);
 }
