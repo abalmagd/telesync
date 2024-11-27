@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:telesync/core/domain/utils/extensions/string_extention.dart';
 import 'package:telesync/core/presentation/widgets/media_poster_list.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -6,8 +7,14 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return ListView(
       children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Text('Movies'.hardcoded, style: theme.textTheme.titleLarge),
+        ),
+        const SizedBox(height: 18),
         MediaPosterList(
           type: 'Popular',
           media: const [
