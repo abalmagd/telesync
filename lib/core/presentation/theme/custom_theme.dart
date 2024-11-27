@@ -37,7 +37,9 @@ mixin CustomTheme {
         surface: Palette.surfaceDark,
         onSurface: Palette.onSurfaceDark,
       ),
-      textTheme: CustomTextTheme.textTheme(context),
+      textTheme: CustomTextTheme.textTheme(context).apply(
+        bodyColor: Palette.onSurfaceDark,
+      ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),

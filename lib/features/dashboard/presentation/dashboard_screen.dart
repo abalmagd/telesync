@@ -20,6 +20,7 @@ class DashboardScreen extends ConsumerWidget {
     );
     return Scaffold(
       extendBody: true,
+      extendBodyBehindAppBar: true,
       appBar: TelesyncAppBar(
         leading: Builder(builder: (context) {
           return IconButton(

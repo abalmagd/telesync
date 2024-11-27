@@ -18,6 +18,7 @@ abstract class TelesyncButton extends StatelessWidget {
     this.icon,
     this.borderColor,
     this.fillColor,
+    this.labelStyle,
   });
 
   final VoidCallback onPressed;
@@ -26,6 +27,7 @@ abstract class TelesyncButton extends StatelessWidget {
   final Icon? icon;
   final Color? borderColor;
   final Color? fillColor;
+  final TextStyle? labelStyle;
   final bool enabled;
   final bool isLoading;
 
@@ -78,14 +80,16 @@ abstract class TelesyncButton extends StatelessWidget {
     required String title,
     bool enabled = true,
     bool isLoading = false,
+    Icon? icon,
+    TextStyle? labelStyle,
   }) {
     return _TelesyncTextButton(
       onPressed: onPressed,
       title: title,
       enabled: enabled,
       isLoading: isLoading,
+      icon: icon,
+      labelStyle: labelStyle,
     );
   }
-
-
 }

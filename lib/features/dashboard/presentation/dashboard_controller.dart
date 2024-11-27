@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:telesync/features/home/presentation/home_screen.dart';
 
 final dashboardControllerProvider =
     AutoDisposeNotifierProvider<DashboardController, int>(
@@ -10,7 +11,7 @@ class DashboardController extends AutoDisposeNotifier<int> {
   late final PageController pageController;
 
   final screens = [
-    const Center(child: Text('1')),
+    const HomeScreen(),
     const Center(child: Text('2')),
     const Center(child: Text('3')),
     const Center(child: Text('4')),
